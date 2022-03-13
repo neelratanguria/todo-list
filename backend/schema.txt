@@ -1,0 +1,15 @@
+User - sign in, profile view
+Name - String (required)
+email - String (required)
+password - String (required)
+Total Number of Tasks - Int (default=0)
+Tasks completed - Int  (default=0)
+
+Task - 
+Pointer - User (required)
+Task- String (required)
+Completion - Boolean (required, False)
+Due Date - Date
+
+Creation, update, delete, read by user, read incomplete tasks
+tasks completion

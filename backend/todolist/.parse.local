@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "todolist"
+    },
+    "todolist": {
+      "applicationId": "4QhwjIMhbqblrrhiRpyM6cLcrhGBTE1nITWilJRQ"
+    }
+  }
+}
