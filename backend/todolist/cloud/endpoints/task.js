@@ -107,10 +107,10 @@ Parse.Cloud.define("v1_fetchByUser", async (request) => {
         }
     }
 
-    const taskPointer = { __type: "Pointer", className: "_User", objectId: user_id }
+    const userPointer = { __type: "Pointer", className: "_User", objectId: user_id }
 
 	var query = new Parse.Query("Task");
-    query.equalTo("user_pointer", taskPointer)
+    query.equalTo("user_pointer", userPointer)
     query.include("user_pointer")
     let taskList = await query.find();
 
@@ -121,8 +121,37 @@ Parse.Cloud.define("v1_fetchByUser", async (request) => {
     }
 });
 
-Parse.Cloud.define("v1_fetchUsersIncompleteTask", (request) => {
-	return "Hello world!";
+Parse.Cloud.define("v1_fetchUsersIncompleteTask", async (request) => {
+	  
+    const { user_id } = request.params;
+   
+    if(!user_id) {
+        return {
+            success: false,
+            message: "'user_id' required"
+        }
+    }
+
+    var queryUser = new Parse.Query("User");
+    var user = null;
+    try {
+        user = await queryUser.get(user_id);
+    } catch(error) {
+        return {success: false,
+            message: "User not in database"}
+    }
+
+	var query = new Parse.Query("Task");
+    query.equalTo("completion", false);
+    query.include("user_pointer");
+    query.equalTo("user_pointer", user);
+    let taskList = await query.find();
+
+    return {
+        success: true,
+        message: "All tasks fetched",
+        tasks: taskList
+    }
 });
 
 Parse.Cloud.define("v1_markTaskComplete", async (request) => {
