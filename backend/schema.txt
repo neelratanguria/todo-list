@@ -11,5 +11,5 @@ Task- String (required)
 Completion - Boolean (required, False)
 Due Date - Date
 
-Creation, update, delete, read by user, read incomplete tasks
+Creation, update, delete, read, fetch by user, read incomplete tasks
 tasks completion
