@@ -12,10 +12,13 @@ def sign_in_request(email, password):
     r = requests.get('https://parseapi.back4app.com/login', params=payload, headers=headers)
     if r.status_code == 200:    
         response_data = r.json()
+        print(response_data)
         return response_data["objectId"] 
+
     else:
         
-        raise Exception("Invalid login")
+        raise Exception("Invalid logined")
 
-    
+sign_in_request("bimal.ray99@gmail.com", "test123")
+
 
