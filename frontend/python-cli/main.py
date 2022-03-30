@@ -1,6 +1,21 @@
-from python_core.reqs.create_task import create_task
-print(create_task)
+def append_parent_path():
+    import sys
+    import os
+    # getting the name of the directory
+    # where the this file is present.
+    current = os.path.dirname(os.path.realpath(__file__))
+    
+    # Getting the parent directory name
+    # where the current directory is present.
+    parent = os.path.dirname(current)
+    
+    # adding the parent directory to 
+    # the sys.path.
+    sys.path.append(parent)
 
+append_parent_path()
+
+from python_core.reqs.create_task import create_task
 testing = True
 
 user_authenticated = False
