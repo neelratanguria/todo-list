@@ -4,8 +4,8 @@ import os
 APP_ID = os.environ["APP_ID"]
 APP_KEY = os.environ["APP_KEY"]
 
-def create_task (id, task):
-    payload= {'user_id': id,'task_name':task}
+def update_task (id, name):
+    payload= {'user_id': id,'task_name':name}
     headers = {'X-Parse-Application-Id': APP_ID,
                'X-Parse-REST-API-Key' : APP_KEY}
     
@@ -17,16 +17,13 @@ def create_task (id, task):
         #print(response_data["result"] )
         
         
-        return response_data["result"]["message" ]
+        return response_data["result"]["message"]
 
      
 
     else:
         
         raise Exception("wrong user id")
-    
-q=create_task("hDbOS6tkgu", "random")
-t="hello"
-print(t+"  bimal")
+
+q= update_task("djmIXK4Wj6","changed")
 print(q)
-        
