@@ -1,3 +1,9 @@
 /frontend/env.bat
 *.pyc
 /env.bat
+*.whl
+*.spec
+frontend/python_core/todocore.egg-info/PKG-INFO
+frontend/python_core/todocore.egg-info/SOURCES.txt
+frontend/python_core/todocore.egg-info/top_level.txt
+frontend/python_core/todocore.egg-info/dependency_links.txt

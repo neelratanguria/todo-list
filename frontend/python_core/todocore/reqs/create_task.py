@@ -1,8 +1,9 @@
 import requests
 import os
+from .keys import APP_ID, APP_KEY
 
-APP_ID = os.environ["APP_ID"]
-APP_KEY = os.environ["APP_KEY"]
+# APP_ID = os.environ["APP_ID"]
+# APP_KEY = os.environ["APP_KEY"]
 
 def create_task(id, task):
     payload= {'user_id': id,'task_name':task}
