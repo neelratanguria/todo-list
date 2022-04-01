@@ -1,8 +1,9 @@
 import requests
 import os
+from .keys import APP_ID, APP_KEY
 
-APP_ID = os.environ["APP_ID"]
-APP_KEY = os.environ["APP_KEY"]
+# APP_ID = os.environ["APP_ID"]
+# APP_KEY = os.environ["APP_KEY"]
 
 
 def sign_in_request(email, password):
@@ -13,15 +14,11 @@ def sign_in_request(email, password):
     if r.status_code == 200:    
         response_data = r.json()
         #print(response_data["objectId"])
-        #print(type(response_data))
-
-        return response_data["objectId"] 
-
+        print("Valid")
+        return True, response_data["objectId"]
     else:
-        
-        raise Exception("Invalid logined")
-
-sign_in_request("bimal.ray99@gmail.com", "test123")
+        print("Invalid")
+        return False, ""
 
 
 
