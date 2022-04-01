@@ -16,6 +16,7 @@ def append_parent_path():
 append_parent_path()
 
 from python_core.reqs.create_task import create_task
+from python_core.reqs.fetch_by_user import read_task
 testing = True
 
 user_authenticated = False
@@ -47,6 +48,10 @@ def runApp():
             if option == '1':
                 task = input("Please input a task: ")
                 print(create_task(user_id, task))
+            
+            elif option == '2':
+                id = input("enter your user id:")
+                print(read_task(id))
         else:
             pass
 
