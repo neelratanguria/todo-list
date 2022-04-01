@@ -1,4 +1,5 @@
 require('./endpoints/task')
+require('./endpoints/user')
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
