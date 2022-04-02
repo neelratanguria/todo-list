@@ -14,7 +14,7 @@ DESCRIPTION = 'Request package for Todo list app'
 #LONG_DESC_TYPE = "text/markdown"
 
 INSTALL_REQUIRES = [
-    #   'numpy',
+       'requests',
     #   'pandas',
     #   'tqdm',
     #   'neurokit2',
