@@ -1,9 +1,28 @@
 
-<MyGrid>
-    Label:
+<MyGrid>:
+
+    GridLayout:
         cols: 1
-        size: root.widget - 200, root.height - 200
-        pos: 100, 100
+        size: root.width - 200,root.height - 200
+        pos: 100,100
 
         GridLayout:
-            
+            cols:2
+
+            Label:
+                text: 'name'
+            TextInput:
+                multinline: False
+
+            Label:
+                text: 'email'
+            TextInput:
+                multinline: False
+
+            Label:
+                text: 'password'
+            TextInput:
+                multinline: False
+
+        Button:
+            text:"signup"
