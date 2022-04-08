@@ -165,7 +165,7 @@ ScreenManager:
         on_press: root.manager.current = 'menu'
     
     MDRectangleFlatButton:
-        text: 'exit'
+        text: 'Exit'
         pos_hint: {'center_x':0.5,'center_y':0.5}
         on_press: root.exit()
     
@@ -233,11 +233,11 @@ sm.add_widget(Sign_up(name='signup'))
 sm.add_widget(ExitScreen(name='exit'))
 
 
-class DemoApp(MDApp):
+class MyApp(MDApp):
 
     def build(self):
         screen = Builder.load_string(screen_helper)
         return screen
 
 
-DemoApp().run()
+MyApp().run()
