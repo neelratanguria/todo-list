@@ -5,33 +5,16 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
+from kivy.uix.widget import widget
 
-class MyGrid(GridLayout):
-    def __init__(self, **kwargs):
-        super(MyGrid, self).__init__(**kwargs)
-        self.cols = 2
+class MyGrid():
+    pass
+
         
-        self.add_widget(Label(text = "Name: "))
-        self.name = TextInput(multiline = False)
-        self.add_widget(self.name)
-
-        self.add_widget(Label(text = "email-id: "))
-        self.email = TextInput(multiline = False)
-        self.add_widget(self.email)
-
-        self.add_widget(Label(text = "password: "))
-        self.password = TextInput(multiline = False)
-        self.add_widget(self.password)
-
-        self.login = Button(text = "login", font_size= 40)
-        self.add_widget(self.login)
-    
-        
-class TestApp(App):
+class MyApp(App):
     def build(self):
-        return Button(text='Hello World')
+        return MyGrid
     
-    def build (self):
-        return MyGrid()
-
-TestApp().run()
+    
+if __name__=="__main__":
+    MyApp().run()
