@@ -1,5 +1,7 @@
 from kivymd.app import MDApp
 import sys
+import json
+import os
 from kivy.lang.builder import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -25,7 +27,7 @@ ScreenManager:
     MDRectangleFlatButton:
         text: 'Profile'
         pos_hint: {'center_x':0.5,'center_y':0.6}
-        on_press: root.manager.current = 'profile'
+        on_press: root.user()
     MDRectangleFlatButton:
         text: 'exit'
         pos_hint: {'center_x':0.5,'center_y':0.5}
@@ -70,7 +72,7 @@ ScreenManager:
     MDRectangleFlatButton:
         text: 'Sign in'
         pos_hint: {'center_x':0.5,'center_y':0.2}
-        on_press: root.manager.current = 'afterlogin'
+        on_press: root.signin()
 
     MDRectangleFlatButton:
         text: 'Back'
@@ -148,9 +150,9 @@ ScreenManager:
 
 
     MDRectangleFlatButton:
-        text: 'Sign in'
+        text: 'Sign up'
         pos_hint: {'center_x':0.5,'center_y':0.2}
-        on_press: root.manager.current = 'afterlogin'
+        on_press: root.signup()
 
     MDRectangleFlatButton:
         text: 'Back'
@@ -168,37 +170,78 @@ ScreenManager:
         text: 'Exit'
         pos_hint: {'center_x':0.5,'center_y':0.5}
         on_press: root.exit()
+
+    MDRectangleFlatButton:
+        text: 'Logout'
+        pos_hint: {'center_x':0.5,'center_y':0.4}
+        on_press: root.logout()
     
         
 """
 
+user_authenticated = False
+
+try:
+    with open('data.json', 'r') as f:
+        data = json.load(f)
+    user_authenticated = True
+    user_id = data["objectId"]
+except FileNotFoundError:
+    pass
+
+
+
 
 class MenuScreen(Screen):
-    pass
+
+    def user(self):
+        global user_authenticated 
+
+        if user_authenticated:
+            self.manager.current = 'afterlogin'
+        
+        else:
+            self.manager.current = 'profile'
 
 
 class ProfileScreen(Screen):
     pass
+    
+
+    
+
 
 class Sign_in(Screen):
     email = ObjectProperty(None)
     password = ObjectProperty(None)
-    
-    def btn(self):
-        print("email:", self.email.text, "password:", self.password.text)
-        self.email.text = ""
-        self.password.text = ""
+
+    def signin(self):
+        email = self.email.text
+        password = self.password.text
+        status, id = sign_in_request(email, password)
+        global user_id
+        global user_authenticated
+
+        if status:
+            user_id = id
+            user_authenticated = True
+            self.manager.current = 'afterlogin'
+            with open('data.json', 'w', encoding='utf-8') as f:
+                json.dump({"logged_in": True, "objectId" : user_id}, f, ensure_ascii=False, indent=4)
+        else:
+            print("Invalid logging")
+
 
 class After_login(Screen):
     pass
 
+
 class Create_task(Screen):
     note = ObjectProperty(None)
-    
+
     def task(self):
         print("task:", self.note.text)
         self.note.text = ""
-        
 
 
 class Read_task(Screen):
@@ -208,18 +251,35 @@ class Read_task(Screen):
 class Sign_up(Screen):
     email = ObjectProperty(None)
     password = ObjectProperty(None)
-    
-    def btn(self):
-        print("email:", self.email.text, "password:", self.password.text)
-        self.email.text = ""
-        self.password.text = ""
 
-    
+    def signup(self):
+        email = self.email.text
+        password = self.password.text
+
+        status, id = sign_up(email, password)
+        global user_authenticated
+        global user_id
+        if status:
+            user_id = id
+            user_authenticated = True
+            with open('data.json', 'w', encoding='utf-8') as f:
+                json.dump({"logged_in": True, "objectId" : user_id}, f, ensure_ascii=False, indent=4)
+        else:
+            print("Invalid sign up")
+
 
 class ExitScreen(Screen):
     def exit(self):
         sys.exit()
 
+    def logout(self):
+        os.remove('data.json')
+        global user_id
+        global user_authenticated
+        user_id = ""
+        user_authenticated = False
+
+        self.manager.current = 'menu'
 
 
 sm = ScreenManager()
