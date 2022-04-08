@@ -7,13 +7,13 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import widget
 
-class MyGrid():
+class MyGrid(widget):
     pass
 
         
 class MyApp(App):
     def build(self):
-        return MyGrid
+        return MyGrid()
     
     
 if __name__=="__main__":

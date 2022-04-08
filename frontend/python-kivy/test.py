@@ -1,3 +1,4 @@
+import json
 from re import MULTILINE
 from tkinter import Label
 from kivy.app import App
@@ -6,6 +7,8 @@ from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 
+
+from todocore.reqs.sign_up import sign_up
 
 
 class MyGrid(GridLayout):
@@ -40,7 +43,17 @@ class MyGrid(GridLayout):
         email = self.email.text
         password = self.password.text
 
-        print ("name:", name,)
+        status, id = sign_up(email, password)
+        
+        if status:
+            user_id = id
+            
+            with open('data.json', 'w', encoding='utf-8') as f:
+                json.dump({"logged_in": True, "objectId" : user_id}, f, ensure_ascii=False, indent=4)
+        else:
+            print("Invalid sign up")
+
+        #print ("name:", name,)
 
         self.name.text = ""
         self.email.text = "" 
