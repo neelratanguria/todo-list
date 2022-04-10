@@ -11,7 +11,7 @@ def create_task(id, task):
     r = requests.post('https://parseapi.back4app.com/parse/functions/v1_createTask', params=payload, headers=headers)
     if r.status_code == 200:    
         response_data = r.json()        
-        return response_data["result"]["message" ]
+        return response_data["result"]["message"]
     else:
         raise Exception("wrong user id")
             

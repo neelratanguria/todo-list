@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <script>
+        console.log("{{ id }}")
+        localStorage.setItem("token", "{{id}}");
+        window.location.href = "/profile?token={{id}}";
+    </script>
+</body>
+
+</html>
