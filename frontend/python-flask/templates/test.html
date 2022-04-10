@@ -45,6 +45,14 @@
         <div data-v-5f0b9ba1="" class="area"></div>
     </div>
     <div id="scrnli_recorder_root"></div>
+
+    <script>
+        let token = localStorage.getItem('token')
+        console.log(token)
+        if (token) {
+            window.location.href = "/profile?token="+token;
+        }
+    </script>
 </body>
 
 </html>

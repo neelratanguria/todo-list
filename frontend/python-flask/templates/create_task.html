@@ -1,0 +1,27 @@
+{% extends "parent.html" %}
+{% block content %}
+<form style="margin: 30px;" method="post">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Task name</label>
+    <input class="form-control" id="taskinput" aria-describedby="emailHelp" name="task">
+    <input type="hidden" class="form-control" id="tokeninput" aria-describedby="emailHelp" name="token" value="1235">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% if successful %}
+  <div class="alert alert-success" role="alert">
+    Successfully saved!
+  </div>
+{% endif %}
+{% if error %}
+<div class="alert alert-danger" role="alert">
+  This is dangerous
+</div>
+{% endif %}
+<script>
+  let create_task_token = localStorage.getItem('token')
+  $(document).ready(function(){
+    $("#tokeninput").val(create_task_token)
+  });
+</script>
+{% endblock %}

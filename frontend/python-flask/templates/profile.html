@@ -1,0 +1,33 @@
+{% extends "parent.html" %}
+{% block content %}
+{% for task in tasks %}
+<div class="card" style="width: 90%; margin: 10px;">
+    <div class="card-body">
+        <p class="card-text">{{task['task']}}</p>
+        <p style="visibility:collapse" class="card-text">{{task['id']}}</p>
+        <button href="#" class="btn btn-primary donedone" id="donebtn">Mark as done</button>
+    </div>
+</div>
+{% endfor %}
+
+<script>
+    $(document).ready(function () {
+        $(".donedone").click(function () {
+            var http = new XMLHttpRequest();
+            var url = '/complete_task';
+            var params = 'task_id='+$(this).prev().text();
+            http.open('POST', url, true);
+            //Send the proper header information along with the request
+            http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            http.onreadystatechange = function () {//Call a function when the state changes.
+                if (http.readyState == 4 && http.status == 200) {
+                    location.reload();
+                }
+            }
+            http.send(params);
+        });
+    });
+
+</script>
+{% endblock %}
